@@ -1,15 +1,21 @@
+# 위상 정렬 알고리즘에 사용할 deque
 from collections import deque
+# 리스트 값 복사를 위한 copy
 import copy
 
 v = int(input())
 
+#모든 노드의 진입 차수를 0으로 초기화
 indegree = [0] * (v + 1)
 
 graph = [[] for i in range(v + 1)]
+
+# 각 강의 시간을 0으로 초기화
 time = [0] * (v + 1)
 
 for i in range(1, v + 1):
     data = list(map(int, input().split()))
+    # 걸리는 시간
     time[i] = data[0]
     for x in data[1:-1]:
         indegree[i] += 1
