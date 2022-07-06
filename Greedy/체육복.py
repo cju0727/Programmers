@@ -1,17 +1,20 @@
 def solution(n, lost, reserve):
+    new_lost = set(lost) - set(reserve)
+    new_reserve = set(reserve) - set(lost)
+    answer = n - len(new_lost)
     
-    # 체육 수업 참가 학생 수 = 전체 학생 수 - 체육복 잃어버린 학생 수
-    answer = n - len(lost)
-
-    # 체육복 잃어버린 학생 수 만큼 반복
-    for i in lost:
-        
-        # 자신의 양 옆의 학생에게 체육복을 빌릴 수 있으면 빌리고 체육 수업 참가
-        if i-1 in reserve:
-            reserve.remove(i-1)
+    for l in new_lost:
+        if l - 1 in new_reserve:
             answer += 1
-        elif i+1 in reserve:
-            reserve.remove(i+1)
+            new_reserve.remove(l - 1)
+        elif l + 1 in new_reserve:
             answer += 1
-        
+            new_reserve.remove(l + 1)
+            
     return answer
+
+n = 5
+lost = [2, 4]
+reserve = [1, 3, 5]
+
+print(solution(n, lost, reserve))
